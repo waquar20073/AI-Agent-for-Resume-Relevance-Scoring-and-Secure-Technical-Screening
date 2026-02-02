@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+
+{% block title %}Home - AI Recruitment Agent{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Hero Section -->
+        <div class="jumbotron bg-gradient-primary text-white p-5 rounded-3 mb-5">
+            <div class="container-fluid">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-robot me-3"></i>
+                    AI Recruitment Agent
+                </h1>
+                <p class="lead mb-4">
+                    Secure, compliant AI-powered recruitment platform for Data Science and Agentic AI roles. 
+                    Our system ensures fairness, transparency, and data integrity throughout the hiring process.
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{{ url_for('resume_upload_page') }}" class="btn btn-light btn-lg me-3 mb-3">
+                            <i class="fas fa-file-upload me-2"></i>
+                            Score Resume
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{ url_for('interview_page') }}" class="btn btn-outline-light btn-lg mb-3">
+                            <i class="fas fa-comments me-2"></i>
+                            Start Interview
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4">Key Features</h2>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-brain fa-3x text-primary"></i>
+                </div>
+                <h5 class="card-title">Resume Relevance Scoring</h5>
+                <p class="card-text">
+                    Advanced NLP-based resume parsing and semantic matching to evaluate candidate suitability 
+                    with transparent scoring and explanations.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-shield-alt fa-3x text-success"></i>
+                </div>
+                <h5 class="card-title">Compliance & Fairness</h5>
+                <p class="card-text">
+                    Built-in bias detection, PII protection, and ethical AI governance to ensure fair 
+                    and compliant hiring practices.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-user-check fa-3x text-warning"></i>
+                </div>
+                <h5 class="card-title">Secure Technical Interview</h5>
+                <p class="card-text">
+                    Adaptive interview system with real-time integrity monitoring and anti-cheating 
+                    mechanisms for reliable technical assessments.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Process Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4">How It Works</h2>
+    </div>
+    
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row process-steps">
+                    <div class="col-md-3 text-center mb-4">
+                        <div class="step-number">1</div>
+                        <h5>Upload Resume</h5>
+                        <p>Candidates upload their resume and job description for analysis</p>
+                    </div>
+                    
+                    <div class="col-md-3 text-center mb-4">
+                        <div class="step-number">2</div>
+                        <h5>AI Scoring</h5>
+                        <p>Our AI analyzes skills, experience, and relevance with compliance checks</p>
+                    </div>
+                    
+                    <div class="col-md-3 text-center mb-4">
+                        <div class="step-number">3</div>
+                        <h5>Technical Interview</h5>
+                        <p>Adaptive interview system assesses technical capabilities with integrity monitoring</p>
+                    </div>
+                    
+                    <div class="col-md-3 text-center mb-4">
+                        <div class="step-number">4</div>
+                        <h5>Comprehensive Report</h5>
+                        <p>Detailed evaluation report with insights and recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Statistics Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4">Platform Capabilities</h2>
+    </div>
+    
+    <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card text-center bg-primary text-white">
+            <div class="card-body">
+                <h3 class="card-title">17+</h3>
+                <p class="card-text">Technical Categories</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card text-center bg-success text-white">
+            <div class="card-body">
+                <h3 class="card-title">100%</h3>
+                <p class="card-text">AI Compliance</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card text-center bg-warning text-white">
+            <div class="card-body">
+                <h3 class="card-title">24/7</h3>
+                <p class="card-text">Availability</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card text-center bg-info text-white">
+            <div class="card-body">
+                <h3 class="card-title">Real-time</h3>
+                <p class="card-text">Integrity Monitoring</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trust Indicators -->
+<div class="row">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h5 class="mb-3">Trusted by Leading Organizations</h5>
+                        <p class="mb-0">
+                            Our platform adheres to the highest standards of AI ethics, data privacy, and 
+                            regulatory compliance. All candidate data is processed with full transparency 
+                            and explainability.
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="trust-badges">
+                            <span class="badge bg-success me-2 mb-2">
+                                <i class="fas fa-check me-1"></i>GDRP Compliant
+                            </span>
+                            <span class="badge bg-primary me-2 mb-2">
+                                <i class="fas fa-shield-alt me-1"></i>Secure
+                            </span>
+                            <span class="badge bg-info me-2 mb-2">
+                                <i class="fas fa-balance-scale me-1"></i>Ethical AI
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.jumbotron.bg-gradient-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.feature-icon {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.feature-icon:hover {
+    opacity: 1;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 auto 20px;
+}
+
+.process-steps {
+    position: relative;
+}
+
+.process-steps::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 25%;
+    right: 25%;
+    height: 2px;
+    background: #e9ecef;
+    z-index: 0;
+}
+
+@media (max-width: 768px) {
+    .process-steps::before {
+        display: none;
+    }
+}
+
+.trust-badges .badge {
+    font-size: 0.9em;
+}
+</style>
+{% endblock %}

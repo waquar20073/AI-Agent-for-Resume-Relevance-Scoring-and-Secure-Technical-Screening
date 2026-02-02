@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Scoring - AI Recruitment Agent{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-file-upload me-2"></i>
+                    Resume Relevance Scoring
+                </h4>
+            </div>
+            <div class="card-body">
+                <form id="resumeForm" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <label for="resume" class="form-label fw-bold">
+                            Upload Resume
+                        </label>
+                        <input type="file" class="form-control" id="resume" name="resume" 
+                               accept=".pdf,.docx,.txt" required>
+                        <div class="form-text">
+                            Supported formats: PDF, DOCX, TXT (Max size: 16MB)
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="jobDescription" class="form-label fw-bold">
+                            Job Description
+                        </label>
+                        <textarea class="form-control" id="jobDescription" name="job_description" 
+                                  rows="8" placeholder="Paste the job description here..." required></textarea>
+                        <div class="form-text">
+                            Provide the complete job description for accurate scoring
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                            <i class="fas fa-brain me-2"></i>
+                            <span id="btnText">Analyze Resume</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Progress Bar -->
+                <div id="progressContainer" class="mt-4" style="display: none;">
+                    <div class="text-center mb-2">
+                        <i class="fas fa-spinner fa-spin me-2"></i>
+                        Analyzing resume...
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                             role="progressbar" style="width: 100%"></div>
+                    </div>
+                </div>
+                
+                <!-- Compliance Alert -->
+                <div id="complianceAlert" class="alert alert-info mt-4" style="display: none;">
+                    <i class="fas fa-shield-alt me-2"></i>
+                    <strong>Compliance Check:</strong> Your resume will be automatically screened for 
+                    PII and bias to ensure fair evaluation.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Information Cards -->
+        <div class="row mt-4">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-chart-line text-primary me-2"></i>
+                            Scoring Criteria
+                        </h6>
+                        <ul class="small mb-0">
+                            <li>Skill Match (40%)</li>
+                            <li>Experience Relevance (30%)</li>
+                            <li>Education Alignment (20%)</li>
+                            <li>Certifications (10%)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-shield-alt text-success me-2"></i>
+                            Compliance Features
+                        </h6>
+                        <ul class="small mb-0">
+                            <li>Automatic PII removal</li>
+                            <li>Bias detection</li>
+                            <li>Fairness checks</li>
+                            <li>Explainable AI</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Results Modal -->
+<div class="modal fade" id="resultsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Scoring Results</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="resultsContent">
+                    <!-- Results will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="viewDetailsBtn">View Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#resumeForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const submitBtn = $('#submitBtn');
+        const btnText = $('#btnText');
+        const progressContainer = $('#progressContainer');
+        const complianceAlert = $('#complianceAlert');
+        
+        // Show loading state
+        submitBtn.prop('disabled', true);
+        btnText.html('<i class="fas fa-spinner fa-spin me-2"></i>Processing...');
+        progressContainer.show();
+        complianceAlert.show();
+        
+        $.ajax({
+            url: '/upload_resume',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.success) {
+                    // Show success message
+                    $('#resultsContent').html(`
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Resume analyzed successfully!
+                        </div>
+                        <p>Your resume has been scored and is ready for review.</p>
+                    `);
+                    
+                    // Show modal
+                    const modal = new bootstrap.Modal(document.getElementById('resultsModal'));
+                    modal.show();
+                    
+                    // Redirect to results page after modal close
+                    $('#viewDetailsBtn').on('click', function() {
+                        window.location.href = response.redirect;
+                    });
+                } else {
+                    showAlert('error', response.error || 'Upload failed');
+                }
+            },
+            error: function(xhr) {
+                const error = xhr.responseJSON ? xhr.responseJSON.error : 'Upload failed';
+                showAlert('error', error);
+            },
+            complete: function() {
+                // Reset loading state
+                submitBtn.prop('disabled', false);
+                btnText.html('<i class="fas fa-brain me-2"></i>Analyze Resume');
+                progressContainer.hide();
+                complianceAlert.hide();
+            }
+        });
+    });
+    
+    // File validation
+    $('#resume').on('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const maxSize = 16 * 1024 * 1024; // 16MB
+            const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+            
+            if (file.size > maxSize) {
+                showAlert('error', 'File size exceeds 16MB limit');
+                $(this).val('');
+                return;
+            }
+            
+            if (!allowedTypes.includes(file.type)) {
+                showAlert('error', 'Invalid file type. Please upload PDF, DOCX, or TXT files');
+                $(this).val('');
+                return;
+            }
+        }
+    });
+    
+    function showAlert(type, message) {
+        const alertClass = type === 'error' ? 'danger' : type;
+        const alert = `
+            <div class="alert alert-${alertClass} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        `;
+        
+        // Remove existing alerts
+        $('.alert').remove();
+        
+        // Add new alert
+        $('#resumeForm').prepend(alert);
+    }
+});
+</script>
+{% endblock %}

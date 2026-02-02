@@ -1,0 +1,107 @@
+  
+                                                                                                                                                       
+ 
+   
+ 
+ 
+Corporate Live Project (CLP) Programme 
+Project Description Form 
+ 
+PROJECT DETAILS:  
+ 
+• Project Objective:  
+AI Agent for Resume Relevance Scoring and Secure Technical Screening in Data Science & 
+Agentic AI Roles 
+To design and prototype an AI-driven recruitment agent that automates early-stage hiring for Data 
+Science and Agentic AI roles by: 
+1. Scoring candidate resumes for relevance and role fit, and 
+2. Conducting a secure, autonomous technical interview that dynamically adapts to candidate 
+responses while enforcing compliance and preventing cheating. 
+The project will ensure fairness, transparency, and data integrity through built-in AI compliance 
+checks, proctoring features, and ethical AI governance. 
+ 
+• Project Description:  
+This project builds a secure, compliance-aware AI agent that mimics the role of a recruiter and 
+interviewer for technical roles. The agent operates through two interconnected modules: 
+Module 1 – Resume Relevance Scoring 
+• Parse candidate resumes and job descriptions using natural language processing and semantic 
+similarity models (e.g., BERT, OpenAI embeddings). 
+• Evaluate alignment on core data science and AI-agentic competencies — e.g., statistics, ML 
+algorithms, Python, LLMs, and AI workflow automation. 
+• Output a Relevance Score (0–100) and generate a transparent explanation of skills matched, 
+missing, or underrepresented. 
+• Include a Compliance Layer that ensures: 
+o No bias or exclusion based on protected attributes (gender, age, religion, etc.). 
+o Explainability for every decision (traceable skill-based reasoning). 
+o Data privacy adherence (no exposure of PII) 
+Module 2 – Secure AI Technical Screening Interview 
+• Conducts a chat-based or voice-based autonomous technical interview without human 
+intervention. 
+  
+                                                                                                                                                       
+ 
+   
+ 
+• Uses a question bank with tagged topics and difficulty levels across: 
+o Data science, statistics, ML, and Python 
+o Deep learning, transformers, LLMs 
+o Agentic AI systems (prompt chaining, reasoning, multi-agent coordination) 
+• Dynamically adapts difficulty based on candidate answers. 
+• Evaluates candidate responses through LLM-based grading rubrics, code validation, or 
+correctness scoring. 
+• Generates a structured Interview Report including: 
+o Sub-scores per domain 
+o Overall technical readiness score 
+o Qualitative feedback summary 
+o Compliance and integrity flags (if applicable) 
+Compliance & Anti-Cheating Mechanisms: 
+To ensure fair, transparent, and tamper-proof assessments, the system will include: 
+1. AI Compliance Engine: 
+o Pre-checks generated questions for bias, sensitive content, or regulatory violations. 
+o Ensures fairness by excluding demographic or personal identifiers from scoring logic. 
+o Logs every decision for post-hoc auditability. 
+2. Candidate Authentication: 
+o One-time token-based login or face snapshot verification (synthetic simulation in 
+prototype). 
+3. Cheat Prevention Controls: 
+o Real-time browser and keystroke activity monitoring (simulated). 
+o Randomized question sequencing and timing constraints. 
+o Detection of copy–paste or external assistance via anomaly detection on response 
+patterns. 
+4. Interview Integrity Dashboard: 
+o Displays compliance score, integrity flags, and audit logs to recruiters. 
+5. Privacy & Ethical Governance: 
+o Use of synthetic or anonymized candidate profiles only. 
+o Clear disclosure of AI-driven evaluation at interview start. 
+o Option for candidate feedback or clarification on scoring. 
+• Project Scope: 
+o Target Roles: Data Scientist, ML Engineer, Agentic AI Developer 
+o Data: Only anonymized or synthetic resumes and job descriptions. 
+o Channels: Web-based text/voice chat simulation for interviews. 
+o Ethics & Fairness: Strict adherence to AI governance principles; protected attributes 
+excluded. 
+o Output: Relevance scores, interview transcripts, evaluation summaries, and compliance 
+logs. 
+o Deliverable Level: Functional prototype with compliance and integrity simulation; not 
+deployed in live hiring. 
+  
+                                                                                                                                                       
+ 
+   
+ 
+ 
+• Project Deliverables: 
+o Architecture Document — end-to-end system workflow (input validation → resume 
+scoring → interview → compliance checks). 
+o Resume Scoring Engine — NLP-based skill extraction and role-match scoring module. 
+o Adaptive Interview Module — dynamic question logic, scoring rubric, and transcript 
+summarization. 
+o Compliance & Integrity Layer — anti-bias filters, cheat detection logic, and audit logging. 
+o Technical Question Bank — curated dataset for Data Science and Agentic AI topics. 
+o Prototype Interface — demo of full flow (resume upload → scoring → secure AI interview 
+→ report). 
+o Evaluation & Compliance Report — metrics on accuracy, bias, explainability, and cheating 
+prevention effectiveness. 
+o Final Presentation — demonstration, ethical review, and roadmap for enterprise 
+integration. 
+ 
