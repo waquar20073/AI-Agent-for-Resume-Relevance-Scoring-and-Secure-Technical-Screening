@@ -166,7 +166,7 @@ This system adheres to strict AI governance principles:
 - Python 3.8+
 - Flask for web interface
 - Transformers/NLTK for NLP processing
-- OpenAI API or similar for LLM capabilities
+- xAI API (Grok) for LLM capabilities
 - SQLite/PostgreSQL for data storage
 - Redis for session management
 

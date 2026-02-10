@@ -13,7 +13,7 @@
                 </h4>
             </div>
             <div class="card-body">
-                <form id="resumeForm" enctype="multipart/form-data">
+                <form id="resumeForm" method="POST" action="/upload_resume" enctype="multipart/form-data" data-disable-global-loader="true">
                     <div class="mb-4">
                         <label for="resume" class="form-label fw-bold">
                             Upload Resume
@@ -140,9 +140,15 @@ $(document).ready(function() {
         
         // Show loading state
         submitBtn.prop('disabled', true);
-        btnText.html('<i class="fas fa-spinner fa-spin me-2"></i>Processing...');
+        // Update button content directly to handle potential conflicts
+        submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...');
         progressContainer.show();
         complianceAlert.show();
+        
+        // Scroll to progress indicator
+        $('html, body').animate({
+            scrollTop: progressContainer.offset().top - 100
+        }, 500);
         
         $.ajax({
             url: '/upload_resume',
@@ -180,7 +186,7 @@ $(document).ready(function() {
             complete: function() {
                 // Reset loading state
                 submitBtn.prop('disabled', false);
-                btnText.html('<i class="fas fa-brain me-2"></i>Analyze Resume');
+                submitBtn.html('<i class="fas fa-brain me-2"></i>Analyze Resume');
                 progressContainer.hide();
                 complianceAlert.hide();
             }

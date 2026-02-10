@@ -32,6 +32,10 @@ $(document).ready(function() {
     // Form validation enhancements
     $('form').on('submit', function(e) {
         var form = $(this);
+        
+        // Skip if form handles its own loading state
+        if (form.data('disable-global-loader')) return;
+        
         var submitBtn = form.find('button[type="submit"]');
         
         // Add loading state to submit button

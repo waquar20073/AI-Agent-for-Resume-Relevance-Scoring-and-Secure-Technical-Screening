@@ -1,6 +1,7 @@
 import PyPDF2
 import docx
 import pdfplumber
+import re
 from typing import Dict, List, Any
 from datetime import datetime
 import uuid

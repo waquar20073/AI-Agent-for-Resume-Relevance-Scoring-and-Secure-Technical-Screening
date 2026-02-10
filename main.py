@@ -55,15 +55,31 @@ def check_dependencies():
         'pandas',
         'nltk',
         'spacy',
-        'sentence-transformers'
+        'sentence-transformers',
+        'scikit-learn',
+        'python-docx',
+        'pdfplumber',
+        'python-dotenv',
+        'openai'
     ]
+    
+    # Map package names to import names
+    package_mapping = {
+        'scikit-learn': 'sklearn',
+        'python-docx': 'docx',
+        'sentence-transformers': 'sentence_transformers',
+        'python-dotenv': 'dotenv'
+    }
     
     missing_packages = []
     
     for package in required_packages:
+        import_name = package_mapping.get(package, package.replace('-', '_'))
         try:
-            __import__(package.replace('-', '_'))
-        except ImportError:
+            __import__(import_name)
+        except ImportError as e:
+            if "No module named 'exceptions'" in str(e):
+                print(f"❌ Error: Legacy 'docx' package detected. Please uninstall 'docx' and install 'python-docx'.")
             missing_packages.append(package)
     
     if missing_packages:

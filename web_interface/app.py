@@ -68,41 +68,43 @@ def upload_resume():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             
-            # Parse resume
-            resume_data = resume_parser.parse_resume(filepath)
-            
-            # Parse job description
-            job_desc = resume_parser.parse_job_description(job_description, "Uploaded Position")
-            
-            # Score resume
-            scoring_result = resume_scorer.score_resume(resume_data, job_desc)
-            
-            # Check compliance
-            compliance_results = compliance_checker.check_resume_compliance(resume_data, job_desc)
-            
-            # Store results in session
-            session['scoring_result'] = {
-                'overall_score': scoring_result.overall_score,
-                'skill_match_score': scoring_result.skill_match_score,
-                'experience_score': scoring_result.experience_score,
-                'education_score': scoring_result.education_score,
-                'certification_score': scoring_result.certification_score,
-                'matched_skills': scoring_result.matched_skills,
-                'missing_skills': scoring_result.missing_skills,
-                'explanation': scoring_result.explanation,
-                'compliance_score': compliance_results['overall_compliance_score'],
-                'compliance_flags': compliance_results['bias_flags'] + compliance_results['privacy_flags']
-            }
-            
-            session['candidate_id'] = resume_data.candidate_id
-            
-            # Clean up uploaded file
-            os.remove(filepath)
-            
-            return jsonify({
-                'success': True,
-                'redirect': url_for('scoring_results')
-            })
+            try:
+                # Parse resume
+                resume_data = resume_parser.parse_resume(filepath)
+                
+                # Parse job description
+                job_desc = resume_parser.parse_job_description(job_description, "Uploaded Position")
+                
+                # Score resume
+                scoring_result = resume_scorer.score_resume(resume_data, job_desc)
+                
+                # Check compliance
+                compliance_results = compliance_checker.check_resume_compliance(resume_data, job_desc)
+                
+                # Store results in session
+                session['scoring_result'] = {
+                    'overall_score': scoring_result.overall_score,
+                    'skill_match_score': scoring_result.skill_match_score,
+                    'experience_score': scoring_result.experience_score,
+                    'education_score': scoring_result.education_score,
+                    'certification_score': scoring_result.certification_score,
+                    'matched_skills': scoring_result.matched_skills,
+                    'missing_skills': scoring_result.missing_skills,
+                    'explanation': scoring_result.explanation,
+                    'compliance_score': compliance_results['overall_compliance_score'],
+                    'compliance_flags': compliance_results['bias_flags'] + compliance_results['privacy_flags']
+                }
+                
+                session['candidate_id'] = resume_data.candidate_id
+                
+                return jsonify({
+                    'success': True,
+                    'redirect': url_for('scoring_results')
+                })
+            finally:
+                # Clean up uploaded file
+                if os.path.exists(filepath):
+                    os.remove(filepath)
         
         return jsonify({'error': 'File type not allowed'}), 400
         
